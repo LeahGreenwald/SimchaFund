@@ -286,33 +286,7 @@ namespace SimchaFund.Data
                 return contribForSimchas;
             }
         }
-        //public List<Contributor> GetContributorsForSimcha(int simchaid)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(_connectionString))
-        //    using (SqlCommand cmd = connection.CreateCommand())
-        //    {
-        //        cmd.CommandText = @"select c.*, sum(d.Amount) as deposited from Contributors c
-        //                            join Deposits d
-        //                            on d.ContributorId = c.Id
-        //                            group by c.FirstName, c.LastName, c.AlwaysInclude, c.Cell, c.Id";
-        //        List<Contributor> contributors = new List<Contributor>();
-        //        connection.Open();
-        //        SqlDataReader reader = cmd.ExecuteReader();
-        //        while (reader.Read())
-        //        {
-        //            contributors.Add(new Contributor
-        //            {
-        //                FirstName = (string)reader["firstName"],
-        //                LastName = (string)reader["lastName"],
-        //                Cell = (string)reader["cell"],
-        //                Id = (int)reader["id"],
-        //                AlwaysInclude = (bool)reader["alwaysInclude"],
-        //                Balance = ((decimal)reader["deposited"]) - GetContributedForContributor((int)reader["id"])
-        //            });
-        //        }
-        //        return contributors;
-        //    }
-        //}
+        
     }
     public class Simcha
     {
