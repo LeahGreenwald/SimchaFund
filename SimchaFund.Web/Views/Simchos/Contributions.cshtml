@@ -1,0 +1,60 @@
+﻿@model ContributionsViewModel
+@using SimchaFund.Data
+
+<div class="header">
+    <h1>
+        Contributors for the
+        @Model.Simcha.Name
+    </h1>
+</div>
+<div class="table-responsive">
+    <form method="POST" action="/simchos/updatecontributions">
+        <input type="hidden" name="simchaId" value="@Model.Simcha.Id" />
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Contribute</th>
+                <th>Name</th>
+                <th>Balance</th>
+                <th>Always Include</th>
+                <th>Amount</th>
+            </tr>
+            @foreach (Contributor contributor in Model.Contributors)
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" name="contributors[@Model.Counter].ContributorId" value="@contributor.Id" />
+                            @if (Model.contribForSimcha.Any(c => c.Id == contributor.Id) || contributor.AlwaysInclude)
+                            {
+                                <input type="checkbox" class="contribute" name="contributors[@Model.Counter].Include" checked value="true"/>
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="contribute" name="contributors[@Model.Counter].Include" value="false"/>
+                            }
+                        
+                    </td>
+                    <td>@contributor.FirstName @contributor.LastName</td>
+                    <td>@contributor.Balance</td>
+                    <td style="text-align: center;">
+                        @if (contributor.AlwaysInclude)
+                        {
+                            <span style="font-size: 25px;" class="oi oi-check"></span>
+                        }
+                    </td>
+                    <td>
+                        <input type="text" name="contributors[@Model.Counter].amount" class="form-control" value=5 />
+                    </td>
+                </tr>
+                @(Model.Counter++)
+
+            }
+        </table>
+        <div style="text-align:center;">
+            <button class="btn-lg btn-danger">Update</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/contributions.js"></script>
+}
